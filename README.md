@@ -4,7 +4,7 @@
 
 Description: None
 
-More information can be found at http://obofoundry.org/ontology/bero
+More information can be found at ***insert url here***
 
 ## Versions
 
