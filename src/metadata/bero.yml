@@ -1,0 +1,27 @@
+# PURL configuration for http://purl.obolibrary.org/obo/bero
+
+idspace: BERO
+base_url: /obo/bero
+
+products:
+- bero.owl: https://raw.githubusercontent.com/obophenotype/bero/main/bero.owl
+- bero.obo: https://raw.githubusercontent.com/obophenotype/bero/main/bero.obo
+
+term_browser: ontobee
+example_terms:
+- BERO_0000000
+
+entries:
+
+- prefix: /releases/
+  replacement: https://raw.githubusercontent.com/obophenotype/bero/v
+
+- prefix: /tracker/
+  replacement: https://github.com/obophenotype/bero/issues
+
+- prefix: /about/
+  replacement: http://www.ontobee.org/ontology/BERO?iri=http://purl.obolibrary.org/obo/
+
+## generic fall-through, serve direct from github by default
+- prefix: /
+  replacement: https://raw.githubusercontent.com/obophenotype/bero/main/

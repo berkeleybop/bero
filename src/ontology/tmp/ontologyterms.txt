@@ -1,0 +1,2 @@
+term
+http://purl.obolibrary.org/obo/BERO_0000000
