@@ -1,5 +1,5 @@
 
-![Build Status](https://github.com/obophenotype/bero/workflows/CI/badge.svg)
+
 # Biological and Environmental Research Ontology
 
 Description: None
