@@ -27,7 +27,6 @@ These are the current imports in BERO
 | envo | http://purl.obolibrary.org/obo/envo.owl | None |
 | go | http://purl.obolibrary.org/obo/go.owl | None |
 | ncit | http://purl.obolibrary.org/obo/ncit.owl | custom |
-| edam | http://purl.obolibrary.org/obo/edam.owl | custom |
 | pato | http://purl.obolibrary.org/obo/pato.owl | custom |
 
 ## Components

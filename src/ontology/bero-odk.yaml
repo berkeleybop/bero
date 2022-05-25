@@ -40,9 +40,9 @@ import_group:
       is_large: TRUE
       make_base: TRUE
       module_type: custom
-    - id: edam
-      make_base: TRUE
-      module_type: custom
+    # - id: edam
+    #   make_base: TRUE
+    #   module_type: custom
     - id: pato
       use_base: TRUE
       module_type: custom
