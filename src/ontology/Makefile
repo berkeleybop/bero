@@ -91,7 +91,7 @@ all_main: $(MAIN_FILES)
 # ----------------------------------------
 
 
-IMPORTS =  mop po omo ecocore obi to chebi ncbitaxon envo go ncit pato
+IMPORTS =  mop po omo ecocore obi to chebi ncbitaxon envo go ncit edam pato mesh
 
 IMPORT_ROOTS = $(patsubst %, $(IMPORTDIR)/%_import, $(IMPORTS))
 IMPORT_OWL_FILES = $(foreach n,$(IMPORT_ROOTS), $(n).owl)
@@ -267,9 +267,17 @@ $(IMPORTDIR)/ncit_import.owl: $(MIRRORDIR)/ncit.owl $(IMPORTDIR)/ncit_terms_comb
 		query --update ../sparql/inject-subset-declaration.ru --update ../sparql/postprocess-module.ru \
 		annotate --ontology-iri $(ONTBASE)/$@ $(ANNOTATE_ONTOLOGY_VERSION) --output $@.tmp.owl && mv $@.tmp.owl $@; fi
 
+## Module for ontology: edam
+
+$(IMPORTDIR)/edam_import.owl: $(MIRRORDIR)/edam.owl
+	echo "ERROR: You have configured your default module type to be custom; this behavior needs to be overwritten in bero.Makefile!" && false
 ## Module for ontology: pato
 
 $(IMPORTDIR)/pato_import.owl: $(MIRRORDIR)/pato.owl
+	echo "ERROR: You have configured your default module type to be custom; this behavior needs to be overwritten in bero.Makefile!" && false
+## Module for ontology: mesh
+
+$(IMPORTDIR)/mesh_import.owl: $(MIRRORDIR)/mesh.owl
 	echo "ERROR: You have configured your default module type to be custom; this behavior needs to be overwritten in bero.Makefile!" && false
 .PHONY: refresh-imports
 refresh-imports:
@@ -385,11 +393,25 @@ mirror-ncit: | $(TMPDIR)
 		$(ROBOT) remove -i $@.tmp.owl --base-iri $(URIBASE)/NCIT --axioms external --preserve-structure false --trim false -o $@.tmp.owl && mv $@.tmp.owl $(TMPDIR)/$@.owl; fi
 
 
+## ONTOLOGY: edam
+.PHONY: mirror-edam
+.PRECIOUS: $(MIRRORDIR)/edam.owl
+mirror-edam: | $(TMPDIR)
+	if [ $(MIR) = true ] && [ $(IMP) = true ]; then $(ROBOT) convert -I https://edamontology.org/EDAM_1.25.owl -o $@.tmp.owl && mv $@.tmp.owl $(TMPDIR)/$@.owl; fi
+
+
 ## ONTOLOGY: pato
 .PHONY: mirror-pato
 .PRECIOUS: $(MIRRORDIR)/pato.owl
 mirror-pato:
 	if [ $(MIR) = true ] && [ $(IMP) = true ]; then curl -L $(URIBASE)/pato/pato-base.owl --create-dirs -o $(MIRRORDIR)/pato.owl --retry 4 --max-time 200 && $(ROBOT) convert -i $(MIRRORDIR)/pato.owl -o $@.tmp.owl && mv $@.tmp.owl $(TMPDIR)/$@.owl; fi
+
+
+## ONTOLOGY: mesh
+.PHONY: mirror-mesh
+.PRECIOUS: $(MIRRORDIR)/mesh.owl
+mirror-mesh: | $(TMPDIR)
+	if [ $(MIR) = true ] && [ $(IMP) = true ]; then $(ROBOT) convert -I https://raw.githubusercontent.com/cmungall/mesh2owl/master/mesh-obo.obo -o $@.tmp.owl && mv $@.tmp.owl $(TMPDIR)/$@.owl; fi
 
 
 $(MIRRORDIR)/%.owl: mirror-% | $(MIRRORDIR)

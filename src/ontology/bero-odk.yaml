@@ -40,13 +40,15 @@ import_group:
       is_large: TRUE
       make_base: TRUE
       module_type: custom
-    # - id: edam
-    #   make_base: TRUE
-    #   module_type: custom
+    - id: edam
+      mirror_from: https://edamontology.org/EDAM_1.25.owl
+      module_type: custom
     - id: pato
       use_base: TRUE
       module_type: custom
-    # - id: mesh
+    - id: mesh
+      mirror_from: https://raw.githubusercontent.com/cmungall/mesh2owl/master/mesh-obo.obo
+      module_type: custom
     
 robot_java_args: '-Xmx20G'
 documentation:
