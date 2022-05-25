@@ -11,6 +11,32 @@ Prefix(dcterms:=<http://purl.org/dc/terms/>)
 
 Ontology(<http://purl.obolibrary.org/obo/bero.owl>
 
+Import(<http://purl.obolibrary.org/obo/bero/imports/mop_import.owl>)
+
+Import(<http://purl.obolibrary.org/obo/bero/imports/po_import.owl>)
+
+Import(<http://purl.obolibrary.org/obo/bero/imports/omo_import.owl>)
+
+Import(<http://purl.obolibrary.org/obo/bero/imports/ecocore_import.owl>)
+
+Import(<http://purl.obolibrary.org/obo/bero/imports/obi_import.owl>)
+
+Import(<http://purl.obolibrary.org/obo/bero/imports/to_import.owl>)
+
+Import(<http://purl.obolibrary.org/obo/bero/imports/chebi_import.owl>)
+
+Import(<http://purl.obolibrary.org/obo/bero/imports/ncbitaxon_import.owl>)
+
+Import(<http://purl.obolibrary.org/obo/bero/imports/envo_import.owl>)
+
+Import(<http://purl.obolibrary.org/obo/bero/imports/go_import.owl>)
+
+Import(<http://purl.obolibrary.org/obo/bero/imports/ncit_import.owl>)
+
+Import(<http://purl.obolibrary.org/obo/bero/imports/edam_import.owl>)
+
+Import(<http://purl.obolibrary.org/obo/bero/imports/pato_import.owl>)
+
 
 Annotation(dcterms:description "None")
 Annotation(dcterms:license <https://creativecommons.org/licenses/unspecified>)
