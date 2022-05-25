@@ -27,6 +27,8 @@ import_group:
       make_base: TRUE
     - id: chebi
       module_type: mirror
+      is_large: TRUE
+      use_gzipped: TRUE
       make_base: TRUE
     - id: ncbitaxon
       mirror_from: http://purl.obolibrary.org/obo/ncbitaxon/subsets/taxslim.owl
@@ -35,6 +37,7 @@ import_group:
     - id: go
       use_base: TRUE
     - id: ncit
+      is_large: TRUE
       make_base: TRUE
       module_type: custom
     - id: edam
