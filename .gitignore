@@ -1,3 +1,4 @@
 .vscode/*.*
 src/ontology/target/bero/*
 src/ontology/imports/*_import.owl
+commads.txt
