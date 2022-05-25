@@ -1,4 +1,6 @@
 .vscode/*.*
 src/ontology/target/bero/*
 src/ontology/imports/*_import.owl
+src/ontology/mirror/*
+src/ontology/tmp/*
 commads.txt
