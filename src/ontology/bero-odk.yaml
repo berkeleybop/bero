@@ -1,20 +1,50 @@
 id: bero
 title: "Biological and Environmental Research Ontology"
-github_org: obophenotype
+github_org: berkeleybop
 git_main_branch: main
 repo: bero
 release_artefacts: 
   - base
   - full
-  - simple
 primary_release: full
 export_formats:
   - owl
   - obo
   - json
-# import_group:
-#   products: 
-#     - id: ro
-#     - id: pato
-#     - id: omo
-robot_java_args: '-Xmx8G'
+import_group:
+  module_type: mirror
+  products: 
+    - id: mop
+      make_base: TRUE
+    - id: po
+      make_base: TRUE
+    - id: omo
+    - id: ecocore
+      use_base: TRUE
+    - id: obi
+      make_base: TRUE
+    - id: to
+      make_base: TRUE
+    - id: chebi
+      module_type: mirror
+      make_base: TRUE
+    - id: ncbitaxon
+      mirror_from: http://purl.obolibrary.org/obo/ncbitaxon/subsets/taxslim.owl
+    - id: envo
+      use_base: TRUE
+    - id: go
+      use_base: TRUE
+    - id: ncit
+      make_base: TRUE
+      module_type: custom
+    - id: edam
+      make_base: TRUE
+      module_type: custom
+    - id: pato
+      use_base: TRUE
+      module_type: custom
+    # - id: mesh
+    
+robot_java_args: '-Xmx20G'
+documentation:
+  documentation_system: mkdocs
