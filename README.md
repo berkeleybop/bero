@@ -1,5 +1,3 @@
-
-![Build Status](https://github.com/obophenotype/bero/workflows/CI/badge.svg)
 # Biological and Environmental Research Ontology
 
 Description: None
@@ -22,7 +20,7 @@ Editors of this ontology should use the edit version, [src/ontology/bero-edit.ow
 
 ## Contact
 
-Please use this GitHub repository's [Issue tracker](https://github.com/obophenotype/bero/issues) to request new terms/classes or report errors or specific concerns related to the ontology.
+Please use this GitHub repository's [Issue tracker](https://github.com/berkeleybop/bero/issues) to request new terms/classes or report errors or specific concerns related to the ontology.
 
 ## Acknowledgements
 
