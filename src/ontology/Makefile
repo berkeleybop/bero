@@ -177,7 +177,8 @@ ASSETS = \
 
 RELEASE_ASSETS = \
   $(MAIN_FILES) \
-  $(SUBSET_FILES)
+  $(SUBSET_FILES) \
+  $(REPORT_FILES)
 
 .PHONY: all_assets
 all_assets: $(ASSETS)
