@@ -22,7 +22,7 @@ These are the current imports in BERO
 | ecocore | http://purl.obolibrary.org/obo/ecocore.owl | None |
 | obi | http://purl.obolibrary.org/obo/obi.owl | None |
 | to | http://purl.obolibrary.org/obo/to.owl | None |
-| chebi | http://purl.obolibrary.org/obo/chebi.owl | mirror |
+| chebi | http://purl.obolibrary.org/obo/chebi.owl | None |
 | ncbitaxon | http://purl.obolibrary.org/obo/ncbitaxon/subsets/taxslim.owl | None |
 | envo | http://purl.obolibrary.org/obo/envo.owl | None |
 | go | http://purl.obolibrary.org/obo/go.owl | None |

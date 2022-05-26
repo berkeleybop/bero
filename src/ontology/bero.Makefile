@@ -4,6 +4,7 @@
 #changes here rather than in the main Makefile
 
 MESH_TERMS_FILE = imports/mesh_terms.txt
+MAIN_FILES_RELEASE = $(foreach n,$(MAIN_FILES), ../../$(n))
 
 $(ONT)-full.owl: $(SRC) $(OTHER_SRC) $(IMPORT_FILES)
 	$(ROBOT) merge --input $< $(patsubst %, -i %, $(OTHER_SRC)) $(patsubst %, -i %, $(IMPORT_FILES)) \
@@ -56,8 +57,6 @@ $(IMPORTDIR)/mesh_import.owl: $(MIRRORDIR)/mesh.owl
 		--branch-from-terms $(MESH_TERMS_FILE)  \
 		query --update ../sparql/preprocess-module.ru --update ../sparql/inject-subset-declaration.ru --update ../sparql/postprocess-module.ru \
 		annotate --ontology-iri $(ONTBASE)/$@ $(ANNOTATE_ONTOLOGY_VERSION) --output $@.tmp.owl && mv $@.tmp.owl $@; fi
-
-MAIN_FILES_RELEASE = $(foreach n,$(MAIN_FILES), ../../$(n))
 
 deploy_release:
 	@test $(GHVERSION)

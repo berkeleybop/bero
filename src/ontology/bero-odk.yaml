@@ -53,6 +53,6 @@ import_group:
 robot_java_args: '-Xmx20G'
 robot_report:
   release_reports: TRUE
-  ensure_owl2dl_profile: TRUE
+  ensure_owl2dl_profile: FALSE
 documentation:
   documentation_system: mkdocs
