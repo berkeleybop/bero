@@ -52,5 +52,7 @@ import_group:
       module_type: custom
     
 robot_java_args: '-Xmx20G'
+robot_report:
+  ensure_owl2dl_profile: TRUE
 documentation:
   documentation_system: mkdocs
