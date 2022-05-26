@@ -11,6 +11,7 @@ export_formats:
   - owl
   - obo
   - json
+allow_equivalents: all
 import_group:
   module_type: mirror
   products: 

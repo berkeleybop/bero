@@ -7,7 +7,7 @@ MESH_TERMS_FILE = imports/mesh_terms.txt
 
 $(ONT)-full.owl: $(SRC) $(OTHER_SRC) $(IMPORT_FILES)
 	$(ROBOT) merge --input $< $(patsubst %, -i %, $(OTHER_SRC)) $(patsubst %, -i %, $(IMPORT_FILES)) \
-		reason --reasoner ELK --equivalent-classes-allowed asserted-only --exclude-tautologies structural \
+		reason --reasoner ELK --equivalent-classes-allowed all --exclude-tautologies structural \
 		relax \
 		reduce -r ELK \
 		$(SHARED_ROBOT_COMMANDS) annotate --ontology-iri $(ONTBASE)/$@ $(ANNOTATE_ONTOLOGY_VERSION) --output $@.tmp.owl && mv $@.tmp.owl $@
