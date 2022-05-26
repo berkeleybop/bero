@@ -57,7 +57,9 @@ $(IMPORTDIR)/mesh_import.owl: $(MIRRORDIR)/mesh.owl
 		query --update ../sparql/preprocess-module.ru --update ../sparql/inject-subset-declaration.ru --update ../sparql/postprocess-module.ru \
 		annotate --ontology-iri $(ONTBASE)/$@ $(ANNOTATE_ONTOLOGY_VERSION) --output $@.tmp.owl && mv $@.tmp.owl $@; fi
 
+MAIN_FILES_RELEASE = $(foreach n,$(MAIN_FILES), ../../$(n))
+
 deploy_release:
 	@test $(GHVERSION)
-	ls -alt $(MAIN_FILES)
-	gh release create $(GHVERSION) --notes "TBD." --title "$(GHVERSION)" --draft $(MAIN_FILES)  --generate-notes
+	ls -alt $(MAIN_FILES_RELEASE)
+	gh release create $(GHVERSION) --notes "TBD." --title "$(GHVERSION)" --draft $(MAIN_FILES_RELEASE)  --generate-notes
