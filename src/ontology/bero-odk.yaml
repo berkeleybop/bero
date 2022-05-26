@@ -11,6 +11,7 @@ export_formats:
   - owl
   - obo
   - json
+allow_equivalents: all
 import_group:
   module_type: mirror
   products: 
@@ -41,13 +42,18 @@ import_group:
       make_base: TRUE
       module_type: custom
     - id: edam
-      make_base: TRUE
+      mirror_from: https://edamontology.org/EDAM_1.25.owl
       module_type: custom
     - id: pato
       use_base: TRUE
       module_type: custom
-    # - id: mesh
+    - id: mesh
+      mirror_from: https://raw.githubusercontent.com/cmungall/mesh2owl/master/mesh-obo.obo
+      module_type: custom
     
 robot_java_args: '-Xmx20G'
+robot_report:
+  release_reports: TRUE
+  ensure_owl2dl_profile: TRUE
 documentation:
   documentation_system: mkdocs

@@ -64,7 +64,7 @@ all: odkversion test all_assets
 
 .PHONY: test
 test: odkversion sparql_test robot_reports $(REPORTDIR)/validate_profile_owl2dl_$(ONT).owl.txt
-	$(ROBOT) reason --input $(SRC) --reasoner ELK  --equivalent-classes-allowed asserted-only --exclude-tautologies structural --output test.owl && rm test.owl && echo "Success"
+	$(ROBOT) reason --input $(SRC) --reasoner ELK  --equivalent-classes-allowed all --exclude-tautologies structural --output test.owl && rm test.owl && echo "Success"
 
 .PHONY: odkversion
 odkversion:
@@ -91,7 +91,7 @@ all_main: $(MAIN_FILES)
 # ----------------------------------------
 
 
-IMPORTS =  mop po omo ecocore obi to chebi ncbitaxon envo go ncit edam pato
+IMPORTS =  mop po omo ecocore obi to chebi ncbitaxon envo go ncit edam pato mesh
 
 IMPORT_ROOTS = $(patsubst %, $(IMPORTDIR)/%_import, $(IMPORTS))
 IMPORT_OWL_FILES = $(foreach n,$(IMPORT_ROOTS), $(n).owl)
@@ -275,6 +275,10 @@ $(IMPORTDIR)/edam_import.owl: $(MIRRORDIR)/edam.owl
 
 $(IMPORTDIR)/pato_import.owl: $(MIRRORDIR)/pato.owl
 	echo "ERROR: You have configured your default module type to be custom; this behavior needs to be overwritten in bero.Makefile!" && false
+## Module for ontology: mesh
+
+$(IMPORTDIR)/mesh_import.owl: $(MIRRORDIR)/mesh.owl
+	echo "ERROR: You have configured your default module type to be custom; this behavior needs to be overwritten in bero.Makefile!" && false
 .PHONY: refresh-imports
 refresh-imports:
 	make IMP=true MIR=true PAT=false IMP_LARGE=true all_imports -B
@@ -393,8 +397,7 @@ mirror-ncit: | $(TMPDIR)
 .PHONY: mirror-edam
 .PRECIOUS: $(MIRRORDIR)/edam.owl
 mirror-edam: | $(TMPDIR)
-	if [ $(MIR) = true ] && [ $(IMP) = true ]; then curl -L $(URIBASE)/edam.owl --create-dirs -o $(MIRRORDIR)/edam.owl --retry 4 --max-time 200 && $(ROBOT) convert -i $(MIRRORDIR)/edam.owl -o $@.tmp.owl && \
-		$(ROBOT) remove -i $@.tmp.owl --base-iri $(URIBASE)/EDAM --axioms external --preserve-structure false --trim false -o $@.tmp.owl && mv $@.tmp.owl $(TMPDIR)/$@.owl; fi
+	if [ $(MIR) = true ] && [ $(IMP) = true ]; then $(ROBOT) convert -I https://edamontology.org/EDAM_1.25.owl -o $@.tmp.owl && mv $@.tmp.owl $(TMPDIR)/$@.owl; fi
 
 
 ## ONTOLOGY: pato
@@ -402,6 +405,13 @@ mirror-edam: | $(TMPDIR)
 .PRECIOUS: $(MIRRORDIR)/pato.owl
 mirror-pato:
 	if [ $(MIR) = true ] && [ $(IMP) = true ]; then curl -L $(URIBASE)/pato/pato-base.owl --create-dirs -o $(MIRRORDIR)/pato.owl --retry 4 --max-time 200 && $(ROBOT) convert -i $(MIRRORDIR)/pato.owl -o $@.tmp.owl && mv $@.tmp.owl $(TMPDIR)/$@.owl; fi
+
+
+## ONTOLOGY: mesh
+.PHONY: mirror-mesh
+.PRECIOUS: $(MIRRORDIR)/mesh.owl
+mirror-mesh: | $(TMPDIR)
+	if [ $(MIR) = true ] && [ $(IMP) = true ]; then $(ROBOT) convert -I https://raw.githubusercontent.com/cmungall/mesh2owl/master/mesh-obo.obo -o $@.tmp.owl && mv $@.tmp.owl $(TMPDIR)/$@.owl; fi
 
 
 $(MIRRORDIR)/%.owl: mirror-% | $(MIRRORDIR)
@@ -506,7 +516,7 @@ $(ONT)-base.owl: $(SRC) $(OTHER_SRC)
 # Full: The full artefacts with imports merged, reasoned
 $(ONT)-full.owl: $(SRC) $(OTHER_SRC) $(IMPORT_FILES)
 	$(ROBOT) merge --input $< \
-		reason --reasoner ELK --equivalent-classes-allowed asserted-only --exclude-tautologies structural \
+		reason --reasoner ELK --equivalent-classes-allowed all --exclude-tautologies structural \
 		relax \
 		reduce -r ELK \
 		$(SHARED_ROBOT_COMMANDS) annotate --ontology-iri $(ONTBASE)/$@ $(ANNOTATE_ONTOLOGY_VERSION) --output $@.tmp.owl && mv $@.tmp.owl $@

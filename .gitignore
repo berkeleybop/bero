@@ -1,3 +1,17 @@
 .vscode/*.*
 src/ontology/target/bero/*
 src/ontology/imports/*_import.owl
+src/ontology/mirror/*.owl*
+src/ontology/tmp/*.owl
+commads.txt
+bero-base.json
+bero-base.obo
+bero-base.owl
+bero-full.json
+bero-full.obo
+bero-full.owl
+bero.json
+bero.obo
+bero.owl
+src/ontology/bero-full.owl
+src/ontology/bero.owl
