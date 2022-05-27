@@ -96,13 +96,13 @@ debug_equivs: $(TMPDIR)/explain_ncit.md $(TMPDIR)/explain_envo1.md $(TMPDIR)/exp
 	cat $^
 
 debug_print_labels: $(TMPDIR)/bero-merged.ofn
-	grep label.*NCIT_C179199 $< | echo
-	grep "label.*NCIT_C1127 " $< | echo
-	grep label.*ENVO_01001479 $< | echo
-	grep label.*ENVO_01001784 $< | echo
-	grep label.*OBI_2100024 $< | echo
-	grep label.*OBI_0003012 $< | echo
-	grep label.*ENVO_01001483 $< | echo
-	grep label.*ENVO_00010504 $< | echo
-	grep label.*OBI_0002781 $< | echo
-	grep label.*OBI_0002783 $< | echo
+	grep label.*NCIT_C179199 $<
+	grep "label.*NCIT_C1127 " $<
+	grep label.*ENVO_01001479 $<
+	grep label.*ENVO_01001784 $<
+	grep label.*OBI_2100024 $<
+	grep label.*OBI_0003012 $<
+	grep label.*ENVO_01001483 $<
+	grep label.*ENVO_00010504 $<
+	grep label.*OBI_0002781 $<
+	grep label.*OBI_0002783 $<
