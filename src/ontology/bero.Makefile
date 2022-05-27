@@ -71,6 +71,9 @@ deploy_release:
 $(TMPDIR)/bero-merged.owl: $(SRC) $(OTHER_SRC) $(IMPORT_FILES)
 	$(ROBOT) merge --input $< $(patsubst %, -i %, $(OTHER_SRC)) $(patsubst %, -i %, $(IMPORT_FILES)) -o $@
 
+$(TMPDIR)/bero-merged.ofn: $(TMPDIR)/bero-merged.owl
+	$(ROBOT) convert --input $< -o $@
+
 $(TMPDIR)/explain_ncit.md: $(TMPDIR)/bero-merged.owl
 	$(ROBOT) explain -i $< --axiom "'Omacetaxine' EquivalentTo 'Omacetaxine Mepesuccinate'" --explanation $@
 
@@ -92,3 +95,14 @@ reason_bero: $(TMPDIR)/bero-merged.owl
 debug_equivs: $(TMPDIR)/explain_ncit.md $(TMPDIR)/explain_envo1.md $(TMPDIR)/explain_envo2.md $(TMPDIR)/explain_obi1.md $(TMPDIR)/explain_obi2.md
 	cat $^
 
+debug_print_labels: $(TMPDIR)/bero-merged.ofn
+	grep label.*NCIT_C179199 $< | echo
+	grep "label.*NCIT_C1127 " $< | echo
+	grep label.*ENVO_01001479 $< | echo
+	grep label.*ENVO_01001784 $< | echo
+	grep label.*OBI_2100024 $< | echo
+	grep label.*OBI_0003012 $< | echo
+	grep label.*ENVO_01001483 $< | echo
+	grep label.*ENVO_00010504 $< | echo
+	grep label.*OBI_0002781 $< | echo
+	grep label.*OBI_0002783 $< | echo
