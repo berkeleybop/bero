@@ -68,23 +68,23 @@ deploy_release:
 ### Ad hoc commands #######
 ###########################
 
-$(TMPDIR)/explain_ncit.md:
+$(TMPDIR)/explain_ncit.md: $(SRC) $(OTHER_SRC) $(IMPORT_FILES)
 	$(ROBOT) merge --input $< $(patsubst %, -i %, $(OTHER_SRC)) $(patsubst %, -i %, $(IMPORT_FILES)) \
 		explain --axiom "'Omacetaxine' EquivalentTo 'Omacetaxine Mepesuccinate'" --explanation $@
 
-$(TMPDIR)/explain_envo1.md:
+$(TMPDIR)/explain_envo1.md: $(SRC) $(OTHER_SRC) $(IMPORT_FILES)
 	$(ROBOT) merge --input $< $(patsubst %, -i %, $(OTHER_SRC)) $(patsubst %, -i %, $(IMPORT_FILES)) \
 		explain --axiom "'fluid astronomical body part' EquivalentTo 'compound astronomical body part'" --explanation $@
 
-$(TMPDIR)/explain_envo2.md:
+$(TMPDIR)/explain_envo2.md: $(SRC) $(OTHER_SRC) $(IMPORT_FILES)
 	$(ROBOT) merge --input $< $(patsubst %, -i %, $(OTHER_SRC)) $(patsubst %, -i %, $(IMPORT_FILES)) \
 		explain --axiom "'surface of an astronomical body' EquivalentTo 'surface layer'" --explanation $@
 
-$(TMPDIR)/explain_obi1.md:
+$(TMPDIR)/explain_obi1.md: $(SRC) $(OTHER_SRC) $(IMPORT_FILES)
 	$(ROBOT) merge --input $< $(patsubst %, -i %, $(OTHER_SRC)) $(patsubst %, -i %, $(IMPORT_FILES)) \
 		explain --axiom "'calcium cation assay' EquivalentTo 'ionized calcium assay'" --explanation $@
 
-$(TMPDIR)/explain_obi2.md:
+$(TMPDIR)/explain_obi2.md: $(SRC) $(OTHER_SRC) $(IMPORT_FILES)
 	$(ROBOT) merge --input $< $(patsubst %, -i %, $(OTHER_SRC)) $(patsubst %, -i %, $(IMPORT_FILES)) \
 		explain --axiom "'lower respiratory tract specimen' EquivalentTo 'lower respiratory tract aspirate specimen'" --explanation $@
 
