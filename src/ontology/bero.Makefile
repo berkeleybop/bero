@@ -62,3 +62,32 @@ deploy_release:
 	@test $(GHVERSION)
 	ls -alt $(MAIN_FILES_RELEASE)
 	gh release create $(GHVERSION) --notes "TBD." --title "$(GHVERSION)" --draft $(MAIN_FILES_RELEASE)  --generate-notes
+
+###########################
+### Debugging section #####
+### Ad hoc commands #######
+###########################
+
+$(TMPDIR)/explain_ncit.md:
+	$(ROBOT) merge --input $< $(patsubst %, -i %, $(OTHER_SRC)) $(patsubst %, -i %, $(IMPORT_FILES)) \
+		explain --axiom "'Omacetaxine' EquivalentTo 'Omacetaxine Mepesuccinate'" --explanation $@
+
+$(TMPDIR)/explain_envo1.md:
+	$(ROBOT) merge --input $< $(patsubst %, -i %, $(OTHER_SRC)) $(patsubst %, -i %, $(IMPORT_FILES)) \
+		explain --axiom "'fluid astronomical body part' EquivalentTo 'compound astronomical body part'" --explanation $@
+
+$(TMPDIR)/explain_envo2.md:
+	$(ROBOT) merge --input $< $(patsubst %, -i %, $(OTHER_SRC)) $(patsubst %, -i %, $(IMPORT_FILES)) \
+		explain --axiom "'surface of an astronomical body' EquivalentTo 'surface layer'" --explanation $@
+
+$(TMPDIR)/explain_obi1.md:
+	$(ROBOT) merge --input $< $(patsubst %, -i %, $(OTHER_SRC)) $(patsubst %, -i %, $(IMPORT_FILES)) \
+		explain --axiom "'calcium cation assay' EquivalentTo 'ionized calcium assay'" --explanation $@
+
+$(TMPDIR)/explain_obi2.md:
+	$(ROBOT) merge --input $< $(patsubst %, -i %, $(OTHER_SRC)) $(patsubst %, -i %, $(IMPORT_FILES)) \
+		explain --axiom "'lower respiratory tract specimen' EquivalentTo 'lower respiratory tract aspirate specimen'" --explanation $@
+
+debug_equivs: $(TMPDIR)/explain_ncit.md $(TMPDIR)/explain_envo1.md $(TMPDIR)/explain_envo2.md $(TMPDIR)/explain_obi1.md $(TMPDIR)/explain_obi2.md
+	cat $^
+
