@@ -87,7 +87,7 @@ $(TMPDIR)/explain_obi2.md: $(TMPDIR)/bero-merged.owl
 	$(ROBOT) explain -i $< --axiom "'lower respiratory tract specimen' EquivalentTo 'lower respiratory tract aspirate specimen'" --explanation $@
 
 reason_bero: $(TMPDIR)/bero-merged.owl
-	$(ROBOT) reason -i $< --reasoner ELK --equivalent-classes-allowed none
+	$(ROBOT) reason -i $< --reasoner ELK --equivalent-classes-allowed asserted-only
 
 debug_equivs: $(TMPDIR)/explain_ncit.md $(TMPDIR)/explain_envo1.md $(TMPDIR)/explain_envo2.md $(TMPDIR)/explain_obi1.md $(TMPDIR)/explain_obi2.md
 	cat $^
