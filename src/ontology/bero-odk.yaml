@@ -22,8 +22,6 @@ import_group:
     - id: omo
     - id: ecocore
       use_base: TRUE
-    - id: obi
-      make_base: TRUE
     - id: to
       make_base: TRUE
     - id: chebi
@@ -48,6 +46,9 @@ import_group:
       module_type: custom
     - id: mesh
       mirror_from: https://raw.githubusercontent.com/cmungall/mesh2owl/master/mesh-obo.obo
+      module_type: custom
+    - id: obi
+      make_base: TRUE
       module_type: custom
     
 robot_java_args: '-Xmx20G'

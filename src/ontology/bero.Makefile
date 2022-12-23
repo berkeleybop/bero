@@ -4,6 +4,7 @@
 #changes here rather than in the main Makefile
 
 MESH_TERMS_FILE = imports/mesh_terms.txt
+NCIT_TERMS_FILE = imports/ncit_terms.txt
 MAIN_FILES_RELEASE = $(foreach n,$(MAIN_FILES), ../../$(n))
 
 $(ONT)-full.owl: $(SRC) $(OTHER_SRC) $(IMPORT_FILES)
@@ -21,7 +22,10 @@ $(IMPORTDIR)/chebi_import.owl: $(MIRRORDIR)/chebi.owl $(IMPORTDIR)/chebi_terms_c
 
 
 $(IMPORTDIR)/ncit_import.owl: $(MIRRORDIR)/ncit.owl $(IMPORTDIR)/ncit_terms_combined.txt
-	if [ $(IMP) = true ]; then $(ROBOT) remove -i $< \
+	if [ $(IMP) = true ]; then $(ROBOT) extract -i $< \
+		--method MIREOT \
+		--branch-from-terms $(NCIT_TERMS_FILE)  \
+		remove \
         --term oboInOwl:hasExactSynonym \
 		query --update ../sparql/preprocess-module.ru --update ../sparql/inject-subset-declaration.ru --update ../sparql/postprocess-module.ru \
 		annotate --ontology-iri $(ONTBASE)/$@ $(ANNOTATE_ONTOLOGY_VERSION) --output $@.tmp.owl && mv $@.tmp.owl $@; fi
@@ -55,6 +59,15 @@ $(IMPORTDIR)/mesh_import.owl: $(MIRRORDIR)/mesh.owl
 	if [ $(IMP) = true ]; then $(ROBOT) extract -i $< \
 		--method MIREOT \
 		--branch-from-terms $(MESH_TERMS_FILE)  \
+		query --update ../sparql/preprocess-module.ru --update ../sparql/inject-subset-declaration.ru --update ../sparql/postprocess-module.ru \
+		annotate --ontology-iri $(ONTBASE)/$@ $(ANNOTATE_ONTOLOGY_VERSION) --output $@.tmp.owl && mv $@.tmp.owl $@; fi
+
+$(IMPORTDIR)/obi_import.owl: $(MIRRORDIR)/obi.owl $(IMPORTDIR)/obi_terms_combined.txt
+	if [ $(IMP) = true ]; then $(ROBOT) remove -i $< \
+		--term OBI:0000011 \
+		--select "self descendants" \
+		--select "owl:deprecated='true'^^xsd:boolean" \
+		--signature true \
 		query --update ../sparql/preprocess-module.ru --update ../sparql/inject-subset-declaration.ru --update ../sparql/postprocess-module.ru \
 		annotate --ontology-iri $(ONTBASE)/$@ $(ANNOTATE_ONTOLOGY_VERSION) --output $@.tmp.owl && mv $@.tmp.owl $@; fi
 
