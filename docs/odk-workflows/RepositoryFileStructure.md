@@ -20,7 +20,6 @@ These are the current imports in BERO
 | po | http://purl.obolibrary.org/obo/po.owl | None |
 | omo | http://purl.obolibrary.org/obo/omo.owl | None |
 | ecocore | http://purl.obolibrary.org/obo/ecocore.owl | None |
-| obi | http://purl.obolibrary.org/obo/obi.owl | None |
 | to | http://purl.obolibrary.org/obo/to.owl | None |
 | chebi | http://purl.obolibrary.org/obo/chebi.owl | None |
 | ncbitaxon | http://purl.obolibrary.org/obo/ncbitaxon/subsets/taxslim.owl | None |
@@ -30,6 +29,7 @@ These are the current imports in BERO
 | edam | https://edamontology.org/EDAM_1.25.owl | custom |
 | pato | http://purl.obolibrary.org/obo/pato.owl | custom |
 | mesh | https://raw.githubusercontent.com/cmungall/mesh2owl/master/mesh-obo.obo | custom |
+| obi | http://purl.obolibrary.org/obo/obi.owl | custom |
 
 ## Components
 Components, in contrast to imports, are considered full members of the ontology. This means that any axiom in a component is also included in the ontology base - which means it is considered _native_ to the ontology. While this sounds complicated, consider this: conceptually, no component should be part of more than one ontology. If that seems to be the case, we are most likely talking about an import. Components are often not needed for ontologies, but there are some use cases:

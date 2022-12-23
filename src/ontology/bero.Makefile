@@ -66,7 +66,6 @@ $(IMPORTDIR)/obi_import.owl: $(MIRRORDIR)/obi.owl $(IMPORTDIR)/obi_terms_combine
 	if [ $(IMP) = true ]; then $(ROBOT) remove -i $< \
 		--term OBI:0000011 \
 		--select "self descendants" \
-		--select "owl:deprecated='true'^^xsd:boolean" \
 		--signature true \
 		query --update ../sparql/preprocess-module.ru --update ../sparql/inject-subset-declaration.ru --update ../sparql/postprocess-module.ru \
 		annotate --ontology-iri $(ONTBASE)/$@ $(ANNOTATE_ONTOLOGY_VERSION) --output $@.tmp.owl && mv $@.tmp.owl $@; fi
