@@ -13,7 +13,6 @@ The latest version of the ontology can always be found at:
  - http://purl.obolibrary.org/obo/bero.owl
  - [BioPortal](https://bioportal.bioontology.org/ontologies/BERO)
 
-(note this will not show up until the request has been approved by obofoundry.org)
 
 ### Editors' version
 
