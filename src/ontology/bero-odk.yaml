@@ -31,7 +31,7 @@ import_group:
     - id: ncbitaxon
       is_large: TRUE
       use_gzipped: TRUE
-      make_base: TRUE
+      make_base: FALSE
     - id: envo
       use_base: TRUE
     - id: go
