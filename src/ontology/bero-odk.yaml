@@ -32,6 +32,8 @@ import_group:
       module_type: mirror
       mirror_type: base
       is_large: TRUE
+      base_iris:
+        - http://purl.obolibrary.org/obo/NCBITaxon_
     - id: envo
       use_base: TRUE
     - id: go

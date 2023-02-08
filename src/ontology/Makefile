@@ -434,7 +434,7 @@ mirror-chebi: | $(TMPDIR)
 mirror-ncbitaxon: | $(TMPDIR)
 	if [ $(MIR) = true ] && [ $(IMP) = true ] && [ $(IMP_LARGE) = true ]; then curl -L $(OBOBASE)/ncbitaxon.owl --create-dirs -o $(MIRRORDIR)/ncbitaxon.owl --retry 4 --max-time 200 &&\
 		$(ROBOT) convert -i $(MIRRORDIR)/ncbitaxon.owl -o $@.tmp.owl && \
-		$(ROBOT) remove -i $@.tmp.owl --base-iri $(URIBASE)/NCBITAXON --axioms external --preserve-structure false --trim false -o $@.tmp.owl &&\
+		$(ROBOT) remove -i $@.tmp.owl --base-iri http://purl.obolibrary.org/obo/NCBITaxon_ --axioms external --preserve-structure false --trim false -o $@.tmp.owl &&\
 		mv $@.tmp.owl $(TMPDIR)/$@.owl; fi
 
 
