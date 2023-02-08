@@ -29,7 +29,9 @@ import_group:
       use_gzipped: TRUE
       make_base: TRUE
     - id: ncbitaxon
-      module_type: custom
+      module_type: mirror
+      mirror_type: base
+      is_large: TRUE
     - id: envo
       use_base: TRUE
     - id: go
