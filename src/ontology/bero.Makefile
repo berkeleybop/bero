@@ -10,9 +10,7 @@ MAIN_FILES_RELEASE = $(foreach n,$(MAIN_FILES), ../../$(n))
 $(ONT)-full.owl: $(SRC) $(OTHER_SRC) $(IMPORT_FILES)
 	$(ROBOT) merge --input $< $(patsubst %, -i %, $(OTHER_SRC)) $(patsubst %, -i %, $(IMPORT_FILES)) \
 		reason --reasoner ELK --equivalent-classes-allowed all --exclude-tautologies structural \
-		relax \
-		reduce -r ELK \
-		$(SHARED_ROBOT_COMMANDS) annotate --ontology-iri $(ONTBASE)/$@ $(ANNOTATE_ONTOLOGY_VERSION) --output $@.tmp.owl && mv $@.tmp.owl $@
+		relax
 
 
 $(IMPORTDIR)/chebi_import.owl: $(MIRRORDIR)/chebi.owl $(IMPORTDIR)/chebi_terms_combined.txt
@@ -69,6 +67,19 @@ $(IMPORTDIR)/obi_import.owl: $(MIRRORDIR)/obi.owl $(IMPORTDIR)/obi_terms_combine
 		--signature true \
 		query --update ../sparql/preprocess-module.ru --update ../sparql/inject-subset-declaration.ru --update ../sparql/postprocess-module.ru \
 		annotate --ontology-iri $(ONTBASE)/$@ $(ANNOTATE_ONTOLOGY_VERSION) --output $@.tmp.owl && mv $@.tmp.owl $@; fi
+
+# Customization of NCBITaxon goal is necessary since it is a very large file and takes a long time to process.
+# With ODK 1.4, it should be possible using mirror_type:base
+mirror-ncbitaxon: | $(TMPDIR)
+	if [ $(MIR) = true ] && [ $(IMP) = true ] && [ $(IMP_LARGE) = true ]; then curl -L $(URIBASE)/ncbitaxon.obo.gz --create-dirs -o $(MIRRORDIR)/ncbitaxon.obo.gz --retry 4 --max-time 200 &&\
+		$(ROBOT) convert -i $(MIRRORDIR)/ncbitaxon.obo.gz -o $@.tmp.owl &&\
+		$(ROBOT) remove -i $@.tmp.owl --base-iri $(URIBASE)/NCBITaxon --axioms external --preserve-structure false --trim false -o $@.tmp.owl &&\
+		mv $@.tmp.owl $(TMPDIR)/$@.owl; fi
+
+$(IMPORTDIR)/ncbitaxon_import.owl: $(MIRRORDIR)/ncbitaxon.owl $(IMPORTDIR)/ncbitaxon_terms_combined.txt
+	if [ $(IMP) = true ] && [ $(IMP_LARGE) = true ]; then $(ROBOT) merge -i $< \
+		annotate --ontology-iri $(ONTBASE)/$@ $(ANNOTATE_ONTOLOGY_VERSION) --output $@.tmp.owl && mv $@.tmp.owl $@; fi
+
 
 deploy_release:
 	@test $(GHVERSION)

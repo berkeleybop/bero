@@ -29,9 +29,7 @@ import_group:
       use_gzipped: TRUE
       make_base: TRUE
     - id: ncbitaxon
-      is_large: TRUE
-      use_gzipped: TRUE
-      make_base: FALSE
+      module_type: custom
     - id: envo
       use_base: TRUE
     - id: go
@@ -53,7 +51,7 @@ import_group:
       make_base: TRUE
       module_type: custom
     
-robot_java_args: '-Xmx20G'
+robot_java_args: '-Xmx24G'
 robot_report:
   release_reports: TRUE
   ensure_owl2dl_profile: FALSE

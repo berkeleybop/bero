@@ -2,6 +2,7 @@
 src/ontology/target/bero/*
 src/ontology/imports/*_import.owl
 src/ontology/mirror/*.owl*
+src/ontology/mirror/*.obo*
 src/ontology/tmp/*.owl
 commads.txt
 bero-base.json
