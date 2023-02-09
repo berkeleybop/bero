@@ -12,6 +12,7 @@ export_formats:
   - obo
   - json
 allow_equivalents: all
+use_edit_file_imports: FALSE
 import_group:
   module_type: mirror
   products: 

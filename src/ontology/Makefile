@@ -579,7 +579,7 @@ $(ONTOLOGYTERMS): $(SRCMERGED)
 	$(ROBOT) query -f csv -i $< --query ../sparql/bero_terms.sparql $@
 
 # ROBOT pipeline that merges imports, including components.
-ROBOT_RELEASE_IMPORT_MODE=$(ROBOT) merge --input $< 
+ROBOT_RELEASE_IMPORT_MODE=$(ROBOT) remove --input $< --select imports --trim false merge $(patsubst %, -i %, $(OTHER_SRC)) merge $(patsubst %, -i %, $(IMPORT_FILES))
 
 # ROBOT pipeline that removes imports, then merges components. This is for release artefacts that start from "base"
 ROBOT_RELEASE_IMPORT_MODE_BASE=$(ROBOT) remove --input $< --select imports --trim false merge $(patsubst %, -i %, $(OTHER_SRC)) 
