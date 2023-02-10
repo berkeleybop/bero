@@ -33,6 +33,7 @@ import_group:
       module_type: mirror
       mirror_type: base
       is_large: TRUE
+      use_gzipped: TRUE
       base_iris:
         - http://purl.obolibrary.org/obo/NCBITaxon_
     - id: envo
