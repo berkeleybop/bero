@@ -70,6 +70,11 @@ $(IMPORTDIR)/obi_import.owl: $(MIRRORDIR)/obi.owl $(IMPORTDIR)/obi_terms_combine
 		query --update ../sparql/preprocess-module.ru --update ../sparql/inject-subset-declaration.ru --update ../sparql/postprocess-module.ru \
 		annotate --ontology-iri $(ONTBASE)/$@ $(ANNOTATE_ONTOLOGY_VERSION) --output $@.tmp.owl && mv $@.tmp.owl $@; fi
 
+$(IMPORTDIR)/ncbitaxon_import.owl: $(MIRRORDIR)/ncbitaxon.owl $(IMPORTDIR)/ncbitaxon_terms_combined.txt
+	if [ $(IMP) = true ] && [ $(IMP_LARGE) = true ]; then $(ROBOT) merge -i $<  \
+	remove --term "http://purl.obolibrary.org/obo/ncbitaxon#genbank_common_name" --term "http://purl.obolibrary.org/obo/ncbitaxon#common_name" --term "oboInOwl:hasOBONamespace" --term "oboInOwl:hasDbXref" --term "ncbitaxon:has_rank" \
+    $(ANNOTATE_CONVERT_FILE); fi
+
 deploy_release:
 	@test $(GHVERSION)
 	ls -alt $(MAIN_FILES_RELEASE)
