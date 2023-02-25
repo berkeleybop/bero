@@ -71,8 +71,11 @@ $(IMPORTDIR)/obi_import.owl: $(MIRRORDIR)/obi.owl $(IMPORTDIR)/obi_terms_combine
 		annotate --ontology-iri $(ONTBASE)/$@ $(ANNOTATE_ONTOLOGY_VERSION) --output $@.tmp.owl && mv $@.tmp.owl $@; fi
 
 $(IMPORTDIR)/ncbitaxon_import.owl: $(MIRRORDIR)/ncbitaxon.owl $(IMPORTDIR)/ncbitaxon_terms_combined.txt
-	if [ $(IMP) = true ] && [ $(IMP_LARGE) = true ]; then $(ROBOT) merge -i $<  \
-	remove --term "http://purl.obolibrary.org/obo/ncbitaxon#genbank_common_name" --term "http://purl.obolibrary.org/obo/ncbitaxon#common_name" --term "oboInOwl:hasOBONamespace" --term "oboInOwl:hasDbXref" --term "ncbitaxon:has_rank" \
+	if [ $(IMP) = true ] && [ $(IMP_LARGE) = true ]; then $(ROBOT) merge -i $(MIRRORDIR)/ncbitaxon.owl  \
+	remove --term "oboInOwl:hasOBONamespace" \
+		--term "oboInOwl:hasDbXref" \
+		--term "http://www.geneontology.org/formats/oboInOwl#hasAlternativeId" \
+		--term "http://purl.obolibrary.org/obo/ncbitaxon#has_rank" \
     $(ANNOTATE_CONVERT_FILE); fi
 
 deploy_release:
