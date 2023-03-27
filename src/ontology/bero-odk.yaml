@@ -29,8 +29,7 @@ import_group:
       use_gzipped: TRUE
       make_base: TRUE
     - id: ncbitaxon
-      is_large: TRUE
-      use_gzipped: TRUE
+      mirror_from: http://purl.obolibrary.org/obo/ncbitaxon/subsets/taxslim.owl
       make_base: TRUE
       base_iris:
         - http://purl.obolibrary.org/obo/NCBITaxon_
